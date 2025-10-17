@@ -8,15 +8,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
+
 :root {
-    /* 调整后的柔和色彩方案 */
-    --primary-color: #6a7a90; /* 沉稳蓝灰，替代亮蓝色 */
-    --primary-color-dark: #586576; /* 更深的蓝灰 */
-    --dark-color: #333333; /* 纯深灰，用于头部和重要标题 */
-    --light-color: #ffffff; /* 纯白 */
-    --grey-color: #f2f2f2; /* 中性浅灰 */
-    --text-color: #555555; /* 中性深灰，提高可读性 */
-    --shadow: 0 5px 15px rgba(0,0,0,0.08); /* 略微减弱阴影强度 */
+    --primary-color: #6a7a90; 
+    --primary-color-dark: #586576; 
+    --dark-color: #333333; 
+    --light-color: #ffffff; 
+    --grey-color: #f2f2f2; 
+    --text-color: #555555; 
+    --shadow: 0 5px 15px rgba(0,0,0,0.08); 
 }
 
 /* --- 全局样式 --- */
@@ -135,9 +135,7 @@ section h3 {
     font-weight: 600;
 }
 
-/* --- 特定区块样式 --- */
 #home {
-    /* 使用新的主色系渐变，保持低饱和度 */
     background-image: linear-gradient(to right, var(--primary-color), var(--primary-color-dark));
     color: #fff;
     text-align: center;
@@ -261,15 +259,60 @@ section h3 {
     font-weight: 400;
 }
 
-.question-block ul {
+.question-block .options-list { 
     list-style-type: none;
     padding-left: 10px;
     margin-top: 15px;
 }
 
-.question-block li {
+.question-block .options-list li {
     margin-bottom: 8px;
 }
+
+.question-block label { 
+    display: block;
+    cursor: pointer;
+    padding: 5px 0;
+}
+
+.question-block input[type="radio"],
+.question-block input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.question-block input[type="text"],
+.question-block textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.submit-btn { /* 提交按钮样式 */
+    display: block;
+    width: 200px;
+    margin: 40px auto 0;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.submit-btn:hover {
+    background: var(--primary-color-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
 
 .purpose {
     background: #eaf5fc;
@@ -295,7 +338,6 @@ footer {
 </head>
 <body>
 
-<!-- 头部和导航栏 -->
 <header>
     <div class="container">
         <h1>融益坊</h1>
@@ -311,16 +353,13 @@ footer {
     </div>
 </header>
 
-<!-- 主体内容区 -->
 <main>
-    <!-- 首页区块 -->
     <section id="home">
-        <h1>SDU CS Man!!! </h1>
+        <h1>SDU CS Man !!! </h1>
         <p>山东大学计算机科学与技术学院 人机交互课程 小组搭建网站。</p>
         <a href="#proposal" class="btn">了解项目详情</a>
     </section>
 
-    <!-- 团队介绍区块 -->
     <section id="team">
         <div class="container">
             <h2>团队介绍</h2>
@@ -341,11 +380,10 @@ footer {
         </div>
     </section>
 
-    <!-- 项目提案区块 -->
     <section id="proposal">
         <div class="container">
             <h2>项目提案</h2>
-            <h3>项目名称： “”</h3>
+            <h3>项目名称： “融益坊”</h3>
             <p>
                 <strong>项目简介：</strong>
                 本项目旨在设计一款智能手机App，为城市中的边缘化群体（如独居老人、外来务工人员、少数民族、残障人士等）提供一个集中、易用的信息与服务平台。该App将整合社区服务、医疗资源，提供多语言支持和个性化提醒功能，以解决他们面临的信息不对称、沟通障碍和紧急求助渠道缺失等问题，提升他们的生活质量和社会融入感。
@@ -365,7 +403,6 @@ footer {
         </div>
     </section>
 
-    <!-- 数据收集计划区块 -->
     <section id="data-collection">
         <div class="container">
             <h2>数据收集计划</h2>
@@ -387,54 +424,55 @@ footer {
         </div>
     </section>
     
-    <!-- 问卷详情区块 -->
     <section id="survey-questions">
         <div class="container">
             <h2>调查问卷详情</h2>
+
+            <form onsubmit="return fakeSubmit(event)">
 
             <h3>第一部分：用户背景画像 (User Profile)</h3>
             
             <div class="question-block">
                 <h4>1. 您的年龄是？<span class="meta">[单选题]</span></h4>
-                <ul>
-                    <li>A. 40岁以下</li>
-                    <li>B. 41-55岁</li>
-                    <li>C. 56-70岁</li>
-                    <li>D. 71岁及以上</li>
+                <ul class="options-list">
+                    <li><label><input type="radio" name="q1_age" value="A"> A. 40岁以下</label></li>
+                    <li><label><input type="radio" name="q1_age" value="B"> B. 41-55岁</label></li>
+                    <li><label><input type="radio" name="q1_age" value="C"> C. 56-70岁</label></li>
+                    <li><label><input type="radio" name="q1_age" value="D"> D. 71岁及以上</label></li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>了解用户的年龄分布，这是划分用户群体（如青年务工者 vs. 老年人）的最基本维度，不同年龄段的需求和数字技能差异巨大。</div>
             </div>
 
             <div class="question-block">
                 <h4>2. 您目前的身份是？<span class="meta">[多选题，可选多项]</span></h4>
-                <ul>
-                    <li>A. 退休人员/独居老人</li>
-                    <li>B. 外来务工人员</li>
-                    <li>C. 全职/兼职工作者</li>
-                    <li>D. 残障人士</li>
-                    <li>E. 少数民族</li>
-                    <li>F. 其他</li>
+                <ul class="options-list">
+                    <li><label><input type="checkbox" name="q2_identity" value="A"> A. 退休人员/独居老人</label></li>
+                    <li><label><input type="checkbox" name="q2_identity" value="B"> B. 外来务工人员</label></li>
+                    <li><label><input type="checkbox" name="q2_identity" value="C"> C. 全职/兼职工作者</label></li>
+                    <li><label><input type="checkbox" name="q2_identity" value="D"> D. 残障人士</label></li>
+                    <li><label><input type="checkbox" name="q2_identity" value="E"> E. 少数民族</label></li>
+                    <li><label><input type="checkbox" name="q2_identity" value="F"> F. 其他</label></li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>精准定位项目报告中提到的核心“边缘化群体”，了解样本中各类用户的占比，为后续交叉分析提供基础。</div>
             </div>
             
             <div class="question-block">
                 <h4>3. 您在这座城市生活了多久？<span class="meta">[单选题]</span></h4>
-                <ul>
-                    <li>A. 不到1年</li>
-                    <li>B. 1-5年</li>
-                    <li>C. 5年以上</li>
+                <ul class="options-list">
+                    <li><label><input type="radio" name="q3_duration" value="A"> A. 不到1年</label></li>
+                    <li><label><input type="radio" name="q3_duration" value="B"> B. 1-5年</label></li>
+                    <li><label><input type="radio" name="q3_duration" value="C"> C. 5年以上</label></li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>衡量用户的社区融入程度。刚来城市的用户可能更需要基础信息和社交支持，而长期居住的用户可能有更深层次的服务需求。</div>
             </div>
             
             <div class="question-block">
                 <h4>4. 您日常交流主要使用的语言是？<span class="meta">[单选题]</span></h4>
-                <ul>
-                    <li>A. 普通话</li>
-                    <li>B. 本地方言</li>
-                    <li>C. 家乡方言/少数民族语言</li>
-                    <li>D. 其他</li>
+                <ul class="options-list">
+                    <li><label><input type="radio" name="q4_language" value="A"> A. 普通话</label></li>
+                    <li><label><input type="radio" name="q4_language" value="B"> B. 本地方言</label></li>
+                    <li><label><input type="radio" name="q4_language" value="C"> C. 家乡方言/少数民族语言</label></li>
+                    <li><label><input type="radio" name="q4_language" value="D"> D. 其他</label></li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>直接量化“语言支持”功能的需求强度。如果选择C的比例很高，说明多语言翻译是App的核心功能之一。</div>
             </div>
@@ -443,49 +481,49 @@ footer {
             
             <div class="question-block">
                 <h4>1. 您使用智能手机的频率是？<span class="meta">[单选题]</span></h4>
-                <ul>
-                    <li>A. 每天都用，离不开</li>
-                    <li>B. 每天会用，但主要用几个功能</li>
-                    <li>C. 偶尔用一下</li>
-                    <li>D. 几乎不用/没有智能手机</li>
+                <ul class="options-list">
+                    <li><label><input type="radio" name="q5_phone_freq" value="A"> A. 每天都用，离不开</label></li>
+                    <li><label><input type="radio" name="q5_phone_freq" value="B"> B. 每天会用，但主要用几个功能</label></li>
+                    <li><label><input type="radio" name="q5_phone_freq" value="C"> C. 偶尔用一下</label></li>
+                    <li><label><input type="radio" name="q5_phone_freq" value="D"> D. 几乎不用/没有智能手机</label></li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>评估产品的潜在用户基数和用户的手机依赖度。如果大部分人选A/B，说明以手机App为载体是可行的。</div>
             </div>
 
             <div class="question-block">
                 <h4>2. 您通常使用手机App完成以下哪些事情？<span class="meta">[多选题]</span></h4>
-                <ul>
-                    <li>A. 与家人朋友聊天（如微信）</li>
-                    <li>B. 看新闻/短视频</li>
-                    <li>C. 网上购物/支付</li>
-                    <li>D. 导航/查地图</li>
-                    <li>E. 网上挂号/政务办事</li>
-                    <li>F. 我很少使用App</li>
+                <ul class="options-list">
+                    <li><label><input type="checkbox" name="q6_app_tasks" value="A"> A. 与家人朋友聊天（如微信）</label></li>
+                    <li><label><input type="checkbox" name="q6_app_tasks" value="B"> B. 看新闻/短视频</label></li>
+                    <li><label><input type="checkbox" name="q6_app_tasks" value="C"> C. 网上购物/支付</label></li>
+                    <li><label><input type="checkbox" name="q6_app_tasks" value="D"> D. 导航/查地图</label></li>
+                    <li><label><input type="checkbox" name="q6_app_tasks" value="E"> E. 网上挂号/政务办事</label></li>
+                    <li><label><input type="checkbox" name="q6_app_tasks" value="F"> F. 我很少使用App</label></li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>了解用户的数字行为广度。如果多数人只用A/B，说明我们的App设计必须极其简单，甚至可以考虑集成在微信小程序中。</div>
             </div>
 
             <div class="question-block">
                 <h4>3. 当您需要安装和学习一个新手机App时，您感觉？<span class="meta">[单选题]</span></h4>
-                <ul>
-                    <li>(1) 非常困难</li>
-                    <li>(2) 有些困难</li>
-                    <li>(3) 一般</li>
-                    <li>(4) 比较容易</li>
-                    <li>(5) 非常容易</li>
+                <ul class="options-list">
+                    <li><label><input type="radio" name="q7_learning_difficulty" value="1"> (1) 非常困难</label></li>
+                    <li><label><input type="radio" name="q7_learning_difficulty" value="2"> (2) 有些困难</label></li>
+                    <li><label><input type="radio" name="q7_learning_difficulty" value="3"> (3) 一般</label></li>
+                    <li><label><input type="radio" name="q7_learning_difficulty" value="4"> (4) 比较容易</label></li>
+                    <li><label><input type="radio" name="q7_learning_difficulty" value="5"> (5) 非常容易</label></li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>量化用户学习新应用的门槛。分数越低，说明我们的App需要越强的引导和极简的设计。</div>
             </div>
             
             <div class="question-block">
                 <h4>4. 在过去一年中，您通过以下哪些渠道获取社区福利或活动信息？<span class="meta">[多选题]</span></h4>
-                <ul>
-                    <li>A. 社区公告栏</li>
-                    <li>B. 邻居/朋友告知</li>
-                    <li>C. 社区工作人员通知</li>
-                    <li>D. 电视/报纸</li>
-                    <li>E. 手机App/微信群</li>
-                    <li>F. 几乎没获取过此类信息</li>
+                <ul class="options-list">
+                    <li><label><input type="checkbox" name="q8_info_channel" value="A"> A. 社区公告栏</label></li>
+                    <li><label><input type="checkbox" name="q8_info_channel" value="B"> B. 邻居/朋友告知</label></li>
+                    <li><label><input type="checkbox" name="q8_info_channel" value="C"> C. 社区工作人员通知</label></li>
+                    <li><label><input type="checkbox" name="q8_info_channel" value="D"> D. 电视/报纸</label></li>
+                    <li><label><input type="checkbox" name="q8_info_channel" value="E"> E. 手机App/微信群</label></li>
+                    <li><label><input type="checkbox" name="q8_info_channel" value="F"> F. 几乎没获取过此类信息</label></li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>评估当前信息渠道的覆盖情况。如果传统渠道（A/B/C）占比高，说明App有机会成为一个高效的线上整合渠道。如果F占比高，说明存在严重的信息鸿沟。</div>
             </div>
@@ -494,47 +532,71 @@ footer {
             
             <div class="question-block">
                 <h4>1. 请对以下服务的获取难度进行打分 (1=非常容易, 5=非常困难)<span class="meta">[矩阵量表]</span></h4>
-                <ul>
-                    <li>去医院看病挂号： (1) (2) (3) (4) (5)</li>
-                    <li>申请政府补贴/福利： (1) (2) (3) (4) (5)</li>
-                    <li>寻找法律/心理咨询： (1) (2) (3) (4) (5)</li>
-                    <li>找到社区志愿服务： (1) (2) (3) (4) (5)</li>
+                <ul class="options-list">
+                    <li>去医院看病挂号：
+                        <label><input type="radio" name="q9_difficulty_hospital" value="1"> 1 </label>
+                        <label><input type="radio" name="q9_difficulty_hospital" value="2"> 2 </label>
+                        <label><input type="radio" name="q9_difficulty_hospital" value="3"> 3 </label>
+                        <label><input type="radio" name="q9_difficulty_hospital" value="4"> 4 </label>
+                        <label><input type="radio" name="q9_difficulty_hospital" value="5"> 5 </label>
+                    </li>
+                    <li>申请政府补贴/福利：
+                        <label><input type="radio" name="q9_difficulty_subsidy" value="1"> 1 </label>
+                        <label><input type="radio" name="q9_difficulty_subsidy" value="2"> 2 </label>
+                        <label><input type="radio" name="q9_difficulty_subsidy" value="3"> 3 </label>
+                        <label><input type="radio" name="q9_difficulty_subsidy" value="4"> 4 </label>
+                        <label><input type="radio" name="q9_difficulty_subsidy" value="5"> 5 </label>
+                    </li>
+                    <li>寻找法律/心理咨询：
+                        <label><input type="radio" name="q9_difficulty_consult" value="1"> 1 </label>
+                        <label><input type="radio" name="q9_difficulty_consult" value="2"> 2 </label>
+                        <label><input type="radio" name="q9_difficulty_consult" value="3"> 3 </label>
+                        <label><input type="radio" name="q9_difficulty_consult" value="4"> 4 </label>
+                        <label><input type="radio" name="q9_difficulty_consult" value="5"> 5 </label>
+                    </li>
+                    <li>找到社区志愿服务：
+                        <label><input type="radio" name="q9_difficulty_volunteer" value="1"> 1 </label>
+                        <label><input type="radio" name="q9_difficulty_volunteer" value="2"> 2 </label>
+                        <label><input type="radio" name="q9_difficulty_volunteer" value="3"> 3 </label>
+                        <label><input type="radio" name="q9_difficulty_volunteer" value="4"> 4 </label>
+                        <label><input type="radio" name="q9_difficulty_volunteer" value="5"> 5 </label>
+                    </li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>量化不同服务领域的痛点强度，帮助确定App应优先整合哪些服务。得分最高的领域是设计的重点。</div>
             </div>
             
             <div class="question-block">
                 <h4>2. 您在办事或看病时，最常遇到的障碍是什么？<span class="meta">[多选题]</span></h4>
-                <ul>
-                    <li>A. 流程太复杂，不知道怎么办</li>
-                    <li>B. 语言不通，沟通困难</li>
-                    <li>C. 排队时间太长</li>
-                    <li>D. 找不到正确的地方/窗口</li>
-                    <li>E. 没有遇到过明显障碍</li>
+                <ul class="options-list">
+                    <li><label><input type="checkbox" name="q10_obstacle" value="A"> A. 流程太复杂，不知道怎么办</label></li>
+                    <li><label><input type="checkbox" name="q10_obstacle" value="B"> B. 语言不通，沟通困难</label></li>
+                    <li><label><input type="checkbox" name="q10_obstacle" value="C"> C. 排队时间太长</label></li>
+                    <li><label><input type="checkbox" name="q10_obstacle" value="D"> D. 找不到正确的地方/窗口</label></li>
+                    <li><label><input type="checkbox" name="q10_obstacle" value="E"> E. 没有遇到过明显障碍</label></li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>从用户视角识别服务流程中的核心障碍，直接对应App的功能设计（如流程指引、语言翻译、在线预约等）。</div>
             </div>
 
             <div class="question-block">
                 <h4>3. 您是否需要以下提醒服务？<span class="meta">[多选题]</span></h4>
-                <ul>
-                    <li>A. 按时吃药提醒</li>
-                    <li>B. 医院复诊/体检提醒</li>
-                    <li>C. 政府补贴申请截止日期提醒</li>
-                    <li>D. 社区活动提醒</li>
-                    <li>E. 我不需要这些提醒</li>
+                <ul class="options-list">
+                    <li><label><input type="checkbox" name="q11_reminders" value="A"> A. 按时吃药提醒</label></li>
+                    <li><label><input type="checkbox" name="q11_reminders" value="B"> B. 医院复诊/体检提醒</label></li>
+                    <li><label><input type="checkbox" name="q11_reminders" value="C"> C. 政府补贴申请截止日期提醒</label></li>
+                    <li><label><input type="checkbox" name="q11_reminders" value="D"> D. 社区活动提醒</label></li>
+                    <li><label><input type="checkbox" name="q11_reminders" value="E"> E. 我不需要这些提醒</label></li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>具体验证“个性化提醒”功能下不同子功能的需求量，帮助确定功能优先级。</div>
             </div>
 
             <div class="question-block">
                 <h4>4. 对您来说，以下哪项服务是您最希望通过手机App一键获得的？<span class="meta">[单选题]</span></h4>
-                <ul>
-                    <li>A. 一键查看附近的社区服务点（食堂、医疗站）</li>
-                    <li>B. 提供语音翻译，方便和医生、工作人员沟通</li>
-                    <li>C. 自动提醒吃药、复诊、交费等</li>
-                    <li>D. 一键紧急求助按钮</li>
-                    <li>E. 其他</li>
+                <ul class="options-list">
+                    <li><label><input type="radio" name="q12_most_wanted" value="A"> A. 一键查看附近的社区服务点（食堂、医疗站）</label></li>
+                    <li><label><input type="radio" name="q12_most_wanted" value="B"> B. 提供语音翻译，方便和医生、工作人员沟通</label></li>
+                    <li><label><input type="radio" name="q12_most_wanted" value="C"> C. 自动提醒吃药、复诊、交费等</label></li>
+                    <li><label><input type="radio" name="q12_most_wanted" value="D"> D. 一键紧急求助按钮</label></li>
+                    <li><label><input type="radio" name="q12_most_wanted" value="E"> E. 其他</label></li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>强制用户做出选择，找出他们心中“最迫切”的需求，这是确定App核心价值的关键问题。</div>
             </div>
@@ -543,98 +605,129 @@ footer {
 
             <div class="question-block">
                 <h4>1. 如果遇到紧急情况，您更倾向于使用哪种方式求助？<span class="meta">[单选题]</span></h4>
-                <ul>
-                    <li>A. 给家人/朋友打电话</li>
-                    <li>B. 拨打110/120</li>
-                    <li>C. 向邻居/社区求助</li>
-                    <li>D. 使用手机App上的一键求助</li>
+                <ul class="options-list">
+                    <li><label><input type="radio" name="q13_emergency_help" value="A"> A. 给家人/朋友打电话</label></li>
+                    <li><label><input type="radio" name="q13_emergency_help" value="B"> B. 拨打110/120</label></li>
+                    <li><label><input type="radio" name="q13_emergency_help" value="C"> C. 向邻居/社区求助</label></li>
+                    <li><label><input type="radio" name="q13_emergency_help" value="D"> D. 使用手机App上的一键求助</label></li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>了解App在紧急求助场景下的竞争地位。如果D选项比例很低，说明需要加强对该功能可靠性和有效性的宣传与设计。</div>
             </div>
 
             <div class="question-block">
                 <h4>2. 您有多大意愿在一个由政府或社区官方认证的App上寻求帮助或咨询？<span class="meta">[单选题]</span></h4>
-                <ul>
-                    <li>(1) 完全不愿意</li>
-                    <li>(2) 不太愿意</li>
-                    <li>(3) 不确定</li>
-                    <li>(4) 比较愿意</li>
-                    <li>(5) 非常愿意</li>
+                <ul class="options-list">
+                    <li><label><input type="radio" name="q14_willingness" value="1"> (1) 完全不愿意</label></li>
+                    <li><label><input type="radio" name="q14_willingness" value="2"> (2) 不太愿意</label></li>
+                    <li><label><input type="radio" name="q14_willingness" value="3"> (3) 不确定</label></li>
+                    <li><label><input type="radio" name="q14_willingness" value="4"> (4) 比较愿意</label></li>
+                    <li><label><input type="radio" name="q14_willingness" value="5"> (5) 非常愿意</label></li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>衡量“官方背书”对建立用户信任的重要性。如果分数高，说明与政府/社区合作是产品推广的关键策略。</div>
             </div>
             
             <div class="question-block">
                 <h4>3. 对于一个能提供多种帮助的手机App，您最关心的是？<span class="meta">[单选题]</span></h4>
-                <ul>
-                    <li>A. 操作是否足够简单</li>
-                    <li>B. 信息是否真实可靠</li>
-                    <li>C. 能否保护我的个人隐私</li>
-                    <li>D. 是否完全免费</li>
+                <ul class="options-list">
+                    <li><label><input type="radio" name="q15_biggest_concern" value="A"> A. 操作是否足够简单</label></li>
+                    <li><label><input type="radio" name="q15_biggest_concern" value="B"> B. 信息是否真实可靠</label></li>
+                    <li><label><input type="radio" name="q15_biggest_concern" value="C"> C. 能否保护我的个人隐私</label></li>
+                    <li><label><input type="radio" name="q15_biggest_concern" value="D"> D. 是否完全免费</label></li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>了解用户的核心价值判断标准。这直接影响产品的设计哲学：是优先易用性、内容审核、安全保护还是商业模式。</div>
             </div>
             
             <div class="question-block">
                 <h4>4. 您是否愿意通过App与社区里的邻居进行线上互助（如帮忙取快递、分享物品）？<span class="meta">[单选题]</span></h4>
-                <ul>
-                    <li>A. 非常愿意，很有用</li>
-                    <li>B. 可以试试看</li>
-                    <li>C. 不太愿意，觉得麻烦</li>
-                    <li>D. 完全不愿意，担心安全</li>
+                <ul class="options-list">
+                    <li><label><input type="radio" name="q16_peer_help" value="A"> A. 非常愿意，很有用</label></li>
+                    <li><label><input type="radio" name="q16_peer_help" value="B"> B. 可以试试看</label></li>
+                    <li><label><input type="radio" name="q16_peer_help" value="C"> C. 不太愿意，觉得麻烦</label></li>
+                    <li><label><input type="radio" name="q16_peer_help" value="D"> D. 完全不愿意，担心安全</label></li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>评估社区社交和P2P互助功能的可行性与用户接受度。</div>
             </div>
 
             <div class="question-block">
                 <h4>5. 在什么情况下，您愿意授权App使用您的位置信息？<span class="meta">[多选题]</span></h4>
-                <ul>
-                    <li>A. 查找附近的医院/服务点时</li>
-                    <li>B. 使用紧急求助功能时</li>
-                    <li>C. 接收社区周边活动通知时</li>
-                    <li>D. 我不愿意在任何情况下提供位置</li>
+                <ul class="options-list">
+                    <li><label><input type="checkbox" name="q17_location_permission" value="A"> A. 查找附近的医院/服务点时</label></li>
+                    <li><label><input type="checkbox" name="q17_location_permission" value="B"> B. 使用紧急求助功能时</label></li>
+                    <li><label><input type="checkbox" name="q17_location_permission" value="C"> C. 接收社区周边活动通知时</label></li>
+                    <li><label><input type="checkbox" name="q17_location_permission" value="D"> D. 我不愿意在任何情况下提供位置</label></li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>探究用户对隐私（特别是位置信息）的敏感度，为功能设计中的权限申请和隐私政策说明提供依据。</div>
             </div>
 
             <div class="question-block">
                 <h4>6. 您认为什么样的设计能让您更愿意使用一个App？<span class="meta">[多选题]</span></h4>
-                <ul>
-                    <li>A. 字号足够大，看得清楚</li>
-                    <li>B. 主要功能用大图标展示，容易点</li>
-                    <li>C. 支持方言或语音操作</li>
-                    <li>D. 页面颜色简单，不花哨</li>
+                <ul class="options-list">
+                    <li><label><input type="checkbox" name="q18_ux_design" value="A"> A. 字号足够大，看得清楚</label></li>
+                    <li><label><input type="checkbox" name="q18_ux_design" value="B"> B. 主要功能用大图标展示，容易点</label></li>
+                    <li><label><input type="checkbox" name="q18_ux_design" value="C"> C. 支持方言或语音操作</label></li>
+                    <li><label><input type="checkbox" name="q18_ux_design" value="D"> D. 页面颜色简单，不花哨</label></li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>直接收集用户对UI/UX的偏好，为无障碍设计提供具体指导。</div>
             </div>
 
              <div class="question-block">
                 <h4>7. 您期望这款App主要由谁来运营和管理？<span class="meta">[单选题]</span></h4>
-                <ul>
-                    <li>A. 政府部门</li>
-                    <li>B. 社区居委会</li>
-                    <li>C. 可靠的商业公司</li>
-                    <li>D. 志愿者组织</li>
+                <ul class="options-list">
+                    <li><label><input type="radio" name="q19_operator" value="A"> A. 政府部门</label></li>
+                    <li><label><input type="radio" name="q19_operator" value="B"> B. 社区居委会</label></li>
+                    <li><label><input type="radio" name="q19_operator" value="C"> C. 可靠的商业公司</label></li>
+                    <li><label><input type="radio" name="q19_operator" value="D"> D. 志愿者组织</label></li>
                 </ul>
                 <div class="purpose"><strong>目的：</strong>进一步探究信任的来源，运营方的性质会直接影响用户的信任感和使用意愿。</div>
             </div>
 
             <div class="question-block">
                 <h4>8. 关于我们设想的这款App，您还有什么其他的建议或担忧吗？<span class="meta">[开放式问题]</span></h4>
+                <textarea name="q20_open_feedback" rows="4" placeholder="请在这里输入您的建议或担忧..."></textarea>
                 <div class="purpose"><strong>目的：</strong>提供一个开放的渠道，捕捉问卷中未能覆盖到的其他重要观点、潜在需求或用户顾虑。</div>
             </div>
 
+            <button type="submit" class="submit-btn">提交问卷</button>
+
+            </form>
         </div>
     </section>
 </main>
 
-<!-- 脚注 -->
 <footer>
     <div class="container">
-        <p>&copy; 2025 星火创新小组 - 人机交互实验课作业</p>
+        <p>&copy; 2025 SDU CS MAN ！！！ - 人机交互实验课作业</p>
     </div>
 </footer>
+
+<script>
+    function fakeSubmit(event) {
+        // 阻止表单默认的提交行为，即阻止页面跳转或数据发送
+        event.preventDefault();
+        // 查找所有问题的输入字段
+        const allInputs = event.target.querySelectorAll('input[type="radio"], input[type="checkbox"], textarea');
+        let isComplete = true; // 假设问卷完成
+
+        let answeredQuestions = new Set();
+        allInputs.forEach(input => {
+            if (input.type === 'radio' && input.checked) {
+                answeredQuestions.add(input.name);
+            } else if (input.type === 'checkbox' && input.checked) {
+                answeredQuestions.add(input.name);
+            } else if (input.tagName === 'TEXTAREA' && input.value.trim() !== '') {
+                 answeredQuestions.add(input.name);
+            }
+        });
+        
+        // 弹出成功提示，模拟数据已提交
+        setTimeout(() => {
+            alert("✅ 问卷提交成功！\n感谢您为本项目的贡献，您的反馈对我们至关重要。");
+            event.target.reset();
+        }, 100); // 略微延迟，使提交过程看起来更真实
+
+        // 关键：返回 false 阻止表单的 HTTP 提交
+        return false;
+    }
+</script>
 </body>
-
 </html>
-
