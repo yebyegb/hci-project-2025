@@ -334,6 +334,147 @@ footer {
     text-align: center;
     padding: 30px 0;
 }
+
+.table-wrap {
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  position: relative;
+  -webkit-overflow-scrolling: touch; /* iOS 平滑滑动 */
+}
+
+/* 轻微的视觉阴影提示用户可以滑动 */
+.table-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.8));
+  border-radius: 0 12px 12px 0;
+}
+
+/* 表格样式优化 */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 1600px; /* 关键：让表格宽度足够大可滑动 */
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* 表头 */
+th {
+  background: var(--primary-color);
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px 8px;
+  position: sticky;
+  top: 0;
+  white-space: nowrap;
+}
+
+/* 单元格 */
+td {
+  border: 1px solid #e0e0e0;
+  padding: 8px 10px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* 鼠标悬停高亮 */
+tr:hover {
+  background: #f9fafc;
+}
+
+/* 自定义滚动条（Chrome / Edge / Safari） */
+.table-wrap::-webkit-scrollbar {
+  height: 10px;
+}
+.table-wrap::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+.table-wrap::-webkit-scrollbar-thumb {
+  background: #c1c7d0;
+  border-radius: 10px;
+}
+.table-wrap::-webkit-scrollbar-thumb:hover {
+  background: #a0a6b0;
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin: 40px 0;
+}
+
+.chart-item {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+
+
+
+.chart-item h4 {
+  margin-bottom: 10px;
+  color: var(--primary-color-dark);
+  font-weight: 600;
+}
+
+.chart-item p {
+  margin-bottom: 20px;
+}
+
+
+.chart-item img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+
+.chart-item img:hover {
+  transform: scale(1.1);
+}
+
+.chart-large {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+
+.chart-large img {
+  width: 100%;
+  max-width:800px;
+  height: auto;
+}
+
+
+p {
+  text-indent: 2em;
+  margin-bottom: 1em;
+  line-height: 1.6;
+}
+
 </style>
 </head>
 <body>
@@ -348,6 +489,9 @@ footer {
                 <li><a href="#proposal">项目提案</a></li>
                 <li><a href="#data-collection">数据收集</a></li>
                 <li><a href="#survey-questions">问卷详情</a></li>
+                <li><a href="#data-results">数据收集结果</a></li>
+                <li><a href="#analysis">数据结果分析</a></li>
+
             </ul>
         </nav>
     </div>
@@ -692,6 +836,495 @@ footer {
             </form>
         </div>
     </section>
+
+    <section id="data-results">
+        <div class="container">
+            <h2>数据收集结果</h2>
+
+            <!-- ============ 访谈记录稿 ============ -->
+            <h3 style="font-size:1.8rem;color:#333;margin-bottom:25px;">访谈记录稿（只保留主要内容）</h3>
+
+            <div class="interview">
+                <h3>访谈一：李大爷（68岁，独居老人）</h3>
+                <p><strong>访谈目的：</strong>了解独居老人在日常生活、信息获取和数字设备使用上的困境。</p>
+                <p><strong>访谈记录：</strong></p>
+                <p><strong>访谈者：</strong>您好，李大爷，您平时获取社区活动或政策通知主要通过什么方式？</p>
+                <p><strong>李大爷：</strong>主要是看楼下公告栏，还有邻居告诉我。有时候也在微信群里看到，但那东西太多，我也分不清哪个是真的。</p>
+                <p><strong>访谈者：</strong>您会使用智能手机里的政务类App吗？</p>
+                <p><strong>李大爷：</strong>政府推荐的那个我信得过，但操作太复杂，我怕点错。上次挂号挂到一半就退出来了，看不清按钮字太小。</p>
+                <p><strong>访谈者：</strong>您希望这样的App有什么功能？</p>
+                <p><strong>李大爷：</strong>能有图文说明最好，像那种一步一步教的，还有能提醒我领药、交费。还有一个，就是不能乱扣钱。</p>
+                <p><strong>访谈者：</strong>谢谢您宝贵的意见。</p>
+            </div>
+
+            <div class="interview">
+                <h3>访谈二：王姨（35岁，外来务工人员）</h3>
+                <p><strong>访谈目的：</strong>了解外来务工人员在城市生活中的信息障碍与服务需求。</p>
+                <p><strong>访谈记录：</strong></p>
+                <p><strong>访谈者：</strong>您好，请问您平时获取社区或政府信息的途径是什么？</p>
+                <p><strong>王姨：</strong>都是老乡群发的，还有中介说的。我看那些通知，字太多太难懂。</p>
+                <p><strong>访谈者：</strong>您信任这类App或线上平台吗？</p>
+                <p><strong>王姨：</strong>要是政府出的，我就信。外面的我不敢用，怕被骗。</p>
+                <p><strong>访谈者：</strong>您觉得需要哪些功能？</p>
+                <p><strong>王姨：</strong>要是能有语音播报最好，我家乡话的那种我能听懂，还有托儿所信息、租房消息，能查就方便多了。</p>
+            </div>
+
+            <div class="interview">
+                <h3>访谈三：赵姐（42岁，少数民族餐馆经营者）</h3>
+                <p><strong>访谈目的：</strong>了解少数民族群体在政策理解与服务获取中的障碍。</p>
+                <p><strong>访谈记录：</strong></p>
+                <p><strong>访谈者：</strong>您好，您平时了解政策和服务信息主要通过什么渠道？</p>
+                <p><strong>赵姐：</strong>我都听朋友说的。那些网站太复杂，汉字我看不全懂。</p>
+                <p><strong>访谈者：</strong>那您希望App有哪些帮助？</p>
+                <p><strong>赵姐：</strong>如果能有民族语言或者图片解释就好了。最好能双语切换。还希望有个能匿名提意见的地方。</p>
+                <p><strong>访谈者：</strong>您认为哪些机构发布的信息最值得信任？</p>
+                <p><strong>赵姐：</strong>政府的、民族事务委员会的我最信。别人做的我不敢用。</p>
+            </div>
+
+            <div class="interview">
+                <h3>访谈四：小陈（28岁，残障人士）</h3>
+                <p><strong>访谈目的：</strong>了解残障人士在使用手机应用中的体验与无障碍需求。</p>
+                <p><strong>访谈记录：</strong></p>
+                <p><strong>访谈者：</strong>您好，请问您平时使用手机进行生活服务方便吗？</p>
+                <p><strong>小陈：</strong>还行吧，但有些App没考虑我们，按钮太小、语音读不出来。</p>
+                <p><strong>访谈者：</strong>那您觉得一个服务类App最重要的是什么？</p>
+                <p><strong>小陈：</strong>无障碍功能。比如读屏能读出来，语音能控制。还有紧急求助，一键就能发位置那种。</p>
+                <p><strong>访谈者：</strong>如果这样的App上线，您会使用吗？</p>
+                <p><strong>小陈：</strong>当然，我希望能更方便点。希望能有我们参与的设计。</p>
+            </div>
+
+            <!-- ============ 问卷数据结果 ============ -->
+            <h3 style="font-size:1.8rem;color:#333;margin:50px 0 25px;">问卷数据结果</h3>
+
+        <!-- 完整 20 题表格（按受访者为行） -->
+            <div style="margin-top:20px" class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Q1 年龄</th>
+                    <th>Q2 身份</th>
+                    <th>Q3 居住时长</th>
+                    <th>Q4 主要语言</th>
+                    <th>Q5 手机使用频率</th>
+                    <th>Q6 常用App任务</th>
+                    <th>Q7 学习App难度</th>
+                    <th>Q8 信息获取渠道</th>
+                    <th>Q9 服务获取难度(医院/补贴/咨询/志愿)</th>
+                    <th>Q10 办事障碍</th>
+                    <th>Q11 需提醒类型</th>
+                    <th>Q12 最希望一键获得的服务</th>
+                    <th>Q13 紧急求助方式</th>
+                    <th>Q14 官方App求助意愿</th>
+                    <th>Q15 最关心</th>
+                    <th>Q16 线上互助意愿</th>
+                    <th>Q17 授权位置信息</th>
+                    <th>Q18 期望的设计</th>
+                    <th>Q19 期望的运营方</th>
+                    <th> Q20 其他建议</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Row 1 -->
+                <tr>
+                    <td>1</td>
+                    <td>71岁及以上</td>
+                    <td>退休/独居老人</td>
+                    <td>5年以上</td>
+                    <td>普通话</td>
+                    <td>每天用，但主要几个功能</td>
+                    <td>聊天、看新闻</td>
+                    <td>2（有些困难）</td>
+                    <td>公告栏 / 邻居 / 社区微信群</td>
+                    <td>5 / 4 / 3 / 2</td>
+                    <td>流程太复杂 / 语言不通 / 排队时间长</td>
+                    <td>吃药提醒 / 复诊提醒</td>
+                    <td>自动提醒 / 用药提醒</td>
+                    <td>给家人打电话</td>
+                    <td>5（非常愿意）</td>
+                    <td>操作是否足够简单</td>
+                    <td>不太愿意（偏保守）</td>
+                    <td>查附近服务点 / 紧急时共享位置</td>
+                    <td>页面简洁/大图标展示</td>
+                    <td>建议政府部门运营</td>
+                    <td>字更大一些
+                </tr>
+
+                <!-- Row 2 -->
+                <tr>
+                    <td>2</td>
+                    <td>41-55岁</td>
+                    <td>外来务工人员</td>
+                    <td>1-5年</td>
+                    <td>家乡方言</td>
+                    <td>每天用，但主要几个功能</td>
+                    <td>聊天/短视频/购物</td>
+                    <td>3（一般）</td>
+                    <td>老乡群 / 中介</td>
+                    <td>4 / 5 / 5 / 3</td>
+                    <td>语言不通 / 流程不清晰</td>
+                    <td>吃药/复诊/活动提醒</td>
+                    <td>语音翻译 / 托儿所信息</td>
+                    <td>给家人打电话</td>
+                    <td>4（比较愿意）</td>
+                    <td>信息是否真实可靠</td>
+                    <td>可以试试看</td>
+                    <td>同意在找服务时授权位置</td>
+                    <td>大字号/希望有语音翻译</td>
+                    <td>建议社区居委会参与运营</td>
+                    <td>希望有老乡在里面帮忙</td>
+                </tr>
+
+                <!-- Row 3 -->
+                <tr>
+                    <td>3</td>
+                    <td>40岁以下</td>
+                    <td>残障人士</td>
+                    <td>5年以上</td>
+                    <td>普通话</td>
+                    <td>每天都用</td>
+                    <td>聊天/购物/导航/工作</td>
+                    <td>4（比较容易）</td>
+                    <td>微信群 / App / 朋友</td>
+                    <td>4 / 4 / 5 / 3</td>
+                    <td>机器或流程不无障碍 / 找不到窗口</td>
+                    <td>吃药提醒 / 复诊提醒</td>
+                    <td>查看附近服务点</td>
+                    <td>拨打110/120</td>
+                    <td>5（非常愿意）</td>
+                    <td>操作是否足够简单</td>
+                    <td>非常愿意参与线上互助</td>
+                    <td>愿意授权位置（用于导航/求助）</td>
+                    <td>大字号/大图标/支持方言与语音/页面简洁</td>
+                    <td>政府部门</td>
+                    <td>无障碍地图要准确</td>
+                </tr>
+
+                <!-- Row 4 -->
+                <tr>
+                    <td>4</td>
+                    <td>56-70岁</td>
+                    <td>少数民族</td>
+                    <td>5年以上</td>
+                    <td>少数民族语言</td>
+                    <td>偶尔用</td>
+                    <td>看电视 / 社区信息</td>
+                    <td>1（非常困难）</td>
+                    <td>社区通知 / 公告栏</td>
+                    <td>5 / 4 / 4 / 2</td>
+                    <td>语言不通 / 流程复杂</td>
+                    <td>语音播报 / 活动提醒</td>
+                    <td>语音翻译</td>
+                    <td>向邻居 / 社区求助</td>
+                    <td>3（不确定）</td>
+                    <td>信息是否真实可靠</td>
+                    <td>完全不愿意（对线上互助持慎重态度）</td>
+                    <td>不愿意提供位置信息（隐私担忧）</td>
+                    <td>支持方言与语音/页面简洁</td>
+                    <td>建议由志愿者组织参与运营</td>
+                </tr>
+
+                <!-- Row 5 -->
+                <tr>
+                    <td>5</td>
+                    <td>41-55岁</td>
+                    <td>全职/兼职工作者</td>
+                    <td>1-5年</td>
+                    <td>本地方言</td>
+                    <td>每天都用</td>
+                    <td>聊天/看新闻/支付</td>
+                    <td>4（比较容易）</td>
+                    <td>电视 / 手机 / 家人</td>
+                    <td>3 / 3 / 4 / 2</td>
+                    <td>排队时间长 / 流程繁琐</td>
+                    <td>复诊/缴费提醒</td>
+                    <td>一键紧急求助</td>
+                    <td>拨打110/120</td>
+                    <td>4（比较愿意）</td>
+                    <td>是否免费 / 隐私保护</td>
+                    <td>可以试试看</td>
+                    <td>在紧急时愿意授权位置</td>
+                    <td>大图标/页面简洁</td>
+                    <td>偏好可靠商业公司或社区支持</td>
+                    <td>广告少一点</td>
+                </tr>
+
+                <!-- Row 6 -->
+                <tr>
+                    <td>6</td>
+                    <td>71岁及以上</td>
+                    <td>退休/独居老人</td>
+                    <td>5年以上</td>
+                    <td>本地方言</td>
+                    <td>每天用，但主要几个功能</td>
+                    <td>聊天/看新闻</td>
+                    <td>2（有些困难）</td>
+                    <td>公告栏 / 社区工作人员</td>
+                    <td>5 / 3 / 3 / 1</td>
+                    <td>流程复杂 / 找不到正确窗口</td>
+                    <td>用药提醒 / 活动通知</td>
+                    <td>自动提醒 / 附近服务点</td>
+                    <td>给家人打电话</td>
+                    <td>5（非常愿意）</td>
+                    <td>操作简单</td>
+                    <td>不太愿意（对线上互助保留）</td>
+                    <td>愿意在找服务时授权位置</td>
+                    <td>大字体/大图标</td>
+                    <td>希望居委会能提供上门教学</td>
+                </tr>
+
+                <!-- Row 7 -->
+                <tr>
+                    <td>7</td>
+                    <td>40岁以下</td>
+                    <td>外来务工人员</td>
+                    <td>&lt;1年</td>
+                    <td>家乡方言</td>
+                    <td>每天都用</td>
+                    <td>聊天/购物/短视频</td>
+                    <td>3（一般）</td>
+                    <td>线上群组 / 老乡</td>
+                    <td>4 / 5 / 5 / 3</td>
+                    <td>语言/流程不清</td>
+                    <td>语音翻译 / 活动提醒</td>
+                    <td>语音翻译</td>
+                    <td>给家人打电话</td>
+                    <td>4（比较愿意）</td>
+                    <td>是否完全免费</td>
+                    <td>可以试试看</td>
+                    <td>愿意授权位置用于服务查找</td>
+                    <td>大字体/语音支持</td>
+                    <td>希望政府部门运营</td>
+                    <td>希望能帮忙找工作</td>
+                </tr>
+
+                <!-- Row 8 -->
+                <tr>
+                    <td>8</td>
+                    <td>56-70岁</td>
+                    <td>独居且残障</td>
+                    <td>5年以上</td>
+                    <td>普通话</td>
+                    <td>偶尔用</td>
+                    <td>看电视/朋友</td>
+                    <td>1（非常困难）</td>
+                    <td>朋友 / 社区</td>
+                    <td>5 / 3 / 3 / 1</td>
+                    <td>机器/流程不无障碍</td>
+                    <td>活动/托付提醒</td>
+                    <td>一键紧急求助</td>
+                    <td>使用App一键求助</td>
+                    <td>5（非常愿意）</td>
+                    <td>操作简单</td>
+                    <td>不愿意（担心安全）</td>
+                    <td>仅在紧急时授权位置</td>
+                    <td>大字体/大图标/语言支持/页面简洁</td>   
+                    <td>建议政府部门主导</td>
+                </tr>
+
+                <!-- Row 9 -->
+                <tr>
+                    <td>9</td>
+                    <td>41-55岁</td>
+                    <td>少数民族 / 全职</td>
+                    <td>5年以上</td>
+                    <td>少数民族语言</td>
+                    <td>每天使用</td>
+                    <td>聊天/短视频/工作相关</td>
+                    <td>3（一般）</td>
+                    <td>App / 朋友</td>
+                    <td>4 / 4 / 4 / 3</td>
+                    <td>语言障碍 / 不知道流程</td>
+                    <td>语音翻译 / 活动提醒</td>
+                    <td>语音翻译</td>
+                    <td>拨打110/120</td>
+                    <td>4（比较愿意）</td>
+                    <td>信息是否真实可靠</td>
+                    <td>可以试试看</td>
+                    <td>愿意授权位置（用于导航/求助）</td>
+                    <td>提供方言与语音支持</td>
+                    <td>倾向于可靠商业公司或政府背书</td>
+                    <td>希望法律咨询</td>
+                </tr>
+
+                <!-- Row 10 -->
+                <tr>
+                    <td>10</td>
+                    <td>71岁及以上</td>
+                    <td>退休老人</td>
+                    <td>5年以上</td>
+                    <td>普通话</td>
+                    <td>每天用，但主要几个功能</td>
+                    <td>聊天/看新闻</td>
+                    <td>2（有些困难）</td>
+                    <td>公告栏 / 社区通知</td>
+                    <td>4 / 3 / 2 / 1</td>
+                    <td>排队/流程/语言问题</td>
+                    <td>复诊/缴费提醒</td>
+                    <td>查看附近服务点</td>
+                    <td>向邻居求助</td>
+                    <td>4（比较愿意）</td>
+                    <td>操作是否足够简单</td>
+                    <td>不太愿意</td>
+                    <td>仅在查附近服务点或紧急时授权</td>
+                    <td>大字体/页面简洁</td>
+                    <td>居委会可做上门辅导</td>
+                    <td>希望有教学</td>
+                </tr>
+
+                </tbody>
+            </table>
+            </div>
+
+            <p style="margin-top:30px;">
+                <strong>主要发现：</strong><br>
+                ① 大多数受访者每日使用手机，但功能集中于聊天与视频娱乐；<br>
+                ② 超过半数用户表示学习新App存在一定困难；<br>
+                ③ “语音翻译”“自动提醒”“一键求助”是最受欢迎的功能；<br>
+                ④ 用户对政府与社区机构信任度最高，建议官方主导推广。
+            </p>
+        </div>
+    </section>
+
+    <section id="analysis">
+        <div class="container">
+            <h2>数据结果分析</h2>
+
+            <h3>1. 问卷数据分析</h3>
+            <p>本次问卷调查共收集了10份有效样本，旨在量化了解目标用户在信息获取、服务使用及App偏好方面的现状与需求。</p>
+
+            <h4>1) 人口统计数据</h4>
+            <p>参与本次问卷调查的10位用户背景多样，基本覆盖了我们项目的主要目标群体。</p>
+
+            <div class="chart-grid">
+                <div class="chart-item">
+                    <h4>年龄分布</h4>
+                    <ul>
+                        <li>40岁以下用户占20%</li>
+                        <li>41-55岁用户占30%</li>
+                        <li>56岁及以上的中老年群体占比达到50%</li>
+                    </ul>
+                    <img src="images/图片1.png" alt="年龄分布图：中老年群体占比50%">
+                </div>
+                <div class="chart-item">
+                    <h4>身份构成</h4>
+                    <ul>
+                        <li>退休/独居老人占50%</li>
+                        <li>外来务工人员占20%</li>
+                        <li>残障人士占20%</li>
+                        <li>少数民族占20%</li>
+                    </ul>
+                    <img src="images/图片2.png" alt="身份构成图：退休/独居老人占50%">
+                </div>
+                <div class="chart-item">
+                    <h4>主要语言</h4>
+                    <ul>
+                        <li>60%的用户主要使用普通话</li>
+                        <li>40%的用户依赖本地方言或家乡/少数民族语言</li>
+                    </ul>
+                    <img src="images/图片3.png" alt="语言分布图：40%用户依赖本地方言或少数民族语言">
+                </div>
+            </div>
+
+            <h4>2) 重要发现</h4>
+            
+            <div class="chart-item">
+                <strong>发现一：操作简单是核心诉求，数字技能存在普遍鸿沟</strong>。
+                <p>在使用App最关心的问题中，半数用户选择了“操作是否足够简单”。</p>
+                <img src="images/图片4.png" alt="图表：使用App最关心的问题">
+                <p>在 学习App难度 的问题是中，71岁以上的老年用户普遍反馈学习App“有些困难”。56-70岁的少数民族用户认为“非常困难”</p>
+                <img src="images/图片5.png" alt="图表：学习App难度评分">
+            </div>
+
+            <div class="chart-item">
+                <strong>发现二：信息获取渠道传统低效，对官方渠道高度信赖</strong>。
+                <p>在 获取信息渠道 问题中，“小区公告”、“社区通知”、“亲友告知”等传统渠道是主要信息来源。</p>
+                <img src="images/图片6.png" alt="图表：信息获取渠道分布">
+                <p>在 期望的APP运营方 问题中, 用户对政府或社区官方背景的App表现出极高的意愿。</p>
+                <img src="images/图片7.png" alt="图表：对App运营方的信任度评分">
+                <img src="images/图片8.png" alt="扇形图表：对App运营方的信任度评分">
+                
+
+            </div>
+            
+            <div class="chart-item">
+                <strong>发现三：语言障碍是隐形壁垒，翻译功能需求迫切</strong>。
+                <p>“语音翻译”在外来务工和少数民族用户中，获得了与“自动提醒”、“一键紧急求助”同等甚至更高的关注度。</p>
+                <img src="images/图片9.png" alt="图表：最希望获得的服务（语音翻译占比）">
+            </div>
+
+            <div class="chart-item">
+                <strong>发现四：渴望邻里互助但心态谨慎，充满矛盾</strong>。
+                <p>在“线上邻里互助意愿”中，选择“非常愿意”的用户比例不高，更多用户选择了“可以试试看”或“不太愿意”，显示出普遍的观望和犹豫心态。</p>
+                <img src="images/图片10.png" alt="图表：线上邻里互助意愿分布">
+            </div>
+
+            <h4>3) 总结与洞察</h4>
+            <p> 通过问卷分析，我们清晰地看到目标用户在数字化生活中面临的“三重鸿沟”：
+                首先是数字技能鸿沟，无论年龄大小，操作复杂是他们接纳新应用的最大障碍；
+                其次是信息获取鸿沟，他们严重依赖低效的线下和社交渠道，导致信息闭塞，而对权威、可信的官方信息平台有强烈需求；
+                最后是情感融入鸿沟，虽然他们渴望与社区建立连接，但在实际行动（如邻里互助）中又因安全感缺失和害怕麻烦别人而表现得十分谨慎。
+                这些发现印证了我们设计一个“集中、易用、可信”平台的必要性，并为功能设计的优先级（简化操作>功能堆砌）提供了有力的数据支持。</p>
+
+            <h3>2. 访谈数据分析</h3>
+            <p>我们通过对4位不同背景的用户进行深度访谈，采用了亲和图法进行分析。从访谈记录稿中提取了超过30条反映用户观点、行为和感受的关键引述，并进行归纳整理，确定了用户需求。</p>
+            
+            <h4> 1)亲和图的制作过程</h4>
+                <ul style="margin-left: 50px;">
+                    <li>
+                        <strong>第一步：提取原始数据</strong>
+                        <p>我们从访谈记录稿中提取了超过30条反映用户观点、行为和感受的关键引述，并将它们记录在独立的“便利贴”上。</p>
+                    </li>
+                    <li>
+                        <strong>第二步：归纳与综合</strong>
+                        <p>我们将意思相近或属于同一主题的便利贴聚集在一起,逐渐形成了几个核心的主题群组。</p>
+                    </li>
+                    <li>
+                        <strong>第三步：提炼主题与构建结构</strong>
+                        <p>为每个群组命名，提炼出能概括其核心内容的主题，并整理出层级关系，最终形成了亲和图。</p>
+
+                    </li>
+                </ul>
+
+            <h4> 2)最终亲和图</h4>
+                <div class="chart-large">
+                    <img src="images/图片11.png" alt="最终亲和图",class="large-img">
+                </div>
+                <ul style="margin-left: 50px;">
+                    <li>
+                        <strong>核心主题一：数字操作的障碍与挫败感</strong>
+                        <p>如：“手机挂号，字又小，步骤又多，点来点去总是出错”，用户核心需求是“App操作要简单，最好能支持语音操作”。</p>
+                    </li>
+                    <li>
+                        <strong>核心主题二：信息获取的困境与信任偏好</strong>
+                        <p>用户面临“微信群里消息太多，一晃就错过了”的渠道困境，并高度信任“政府办的，感觉正规”的信息。</p>
+                    </li>
+                    <li>
+                        <strong>核心主题三：求助与连接的矛盾心态</strong>
+                        <p>用户因“怕麻烦别人”和担心安全而谨慎，同时渴望“我也能为社区做贡献”。</p>
+                    </li>
+                    <li>
+                        <strong>核心主题四：融入的渴望与现实的壁垒</strong>
+                        <p>语言和文化障碍明显，例如“去政府办事听不懂，只能一直点头”，同时渴望“让本地人了解我们”。</p>
+                    </li>
+                    <li>
+                        <strong>核心主题五：特定场景下的刚性需求</strong>
+                        <p>包括“紧急求助”、无障碍出行信息（如电梯和人行道信息）和生活服务（如托儿所）。</p>
+                    </li>
+                </ul>
+            <h4> 3)总结与洞察</h4>
+                <p>
+                    访谈数据的亲和图分析让我们深刻体会到，用户的困难远不止于“不会用手机”。
+                    我们看到了强烈的自尊心和对“麻烦别人”的恐惧，这解释了为何他们在遇到困难时宁愿独自承受也不愿轻易求助。
+                    我们还发现了基于身份认同的信任圈（如老乡群、病友群），这既是他们的支持系统，也反映出他们与主流社区之间的隔阂。
+                    一个令人意外的发现是，即便是像小陈这样的年轻用户，也渴望从被帮助者转变为贡献者，寻求一种平等参与的社区关系。
+                    这些质性洞察补充了问卷数据，揭示了用户行为背后复杂的情感和心理动机。
+                    因此，我们的App不仅要解决功能层面的问题，更要在设计中体现尊重、包容和平等，营造一个安全、有尊严的数字空间，这才是产品能否成功的关键。
+                </p>
+        </div>
+    </section>
+
+
 </main>
 
 <footer>
